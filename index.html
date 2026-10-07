@@ -1,62 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heartbeat Generator</title>
+    <title>Heartbeat Sound for Sleep &amp; Relaxation</title>
+    <meta name="description" content="A free, gentle heartbeat sound you can loop all night. Adjust the heart rate and volume, set a sleep timer, and play it for sleep, comfort or focus. No sign-up, no ads.">
+    <link rel="canonical" href="https://umar8092.github.io/heartbeat-generator/">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%E2%9D%A4%EF%B8%8F%3C/text%3E%3C/svg%3E">
+    <meta name="theme-color" content="#14070d">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://umar8092.github.io/heartbeat-generator/">
+    <meta property="og:title" content="Heartbeat Sound for Sleep &amp; Relaxation">
+    <meta property="og:description" content="A free, gentle heartbeat sound you can loop all night, with adjustable heart rate, volume and a sleep timer.">
+    <meta property="og:image" content="https://umar8092.github.io/heartbeat-generator/screenshots/social.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Heartbeat Sound","url":"https://umar8092.github.io/heartbeat-generator/","description":"A gentle heartbeat sound for sleep, comfort and relaxation, with adjustable heart rate, volume and a sleep timer.","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires a browser with Web Audio support","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"license":"https://opensource.org/licenses/MIT","author":{"@type":"Person","name":"Muhammad Umar","url":"https://github.com/umar8092"}}</script>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>Heartbeat Sound</h1>
-    <button id="startButton">Start Heartbeat</button>
 
-    <script>
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+<body data-playing="false">
+    <main class="app">
+        <header>
+            <h1>Heartbeat Sound</h1>
+            <p class="sub">A steady, gentle heartbeat for sleep, comfort and focus.</p>
+        </header>
 
-        function playHeartbeat(time) {
-            const oscillator1 = audioCtx.createOscillator();
-            const gainNode1 = audioCtx.createGain();
+        <div class="stage">
+            <svg id="heart" class="heart" viewBox="0 0 100 90" aria-hidden="true">
+                <defs>
+                    <linearGradient id="hg" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#ff6b81" />
+                        <stop offset="1" stop-color="#d6234a" />
+                    </linearGradient>
+                </defs>
+                <path fill="url(#hg)" d="M50 86C20 62 3 46 3 27 3 14 13 5 26 5c10 0 19 6 24 14C55 11 64 5 74 5c13 0 23 9 23 22 0 19-17 35-47 59z" />
+            </svg>
+            <p class="bpm"><span id="bpm-value">70</span> <small>BPM</small></p>
+        </div>
 
-            oscillator1.frequency.setValueAtTime(150, time);
-            oscillator1.frequency.exponentialRampToValueAtTime(0.01, time + 0.1);
+        <button type="button" id="play" class="play" aria-pressed="false" aria-label="Play heartbeat">
+            <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+            <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" /></svg>
+        </button>
 
-            gainNode1.gain.setValueAtTime(1, time);
-            gainNode1.gain.exponentialRampToValueAtTime(0.01, time + 0.1);
+        <section class="panel" aria-label="Heart rate">
+            <label for="bpm">Heart rate</label>
+            <input type="range" id="bpm" min="40" max="200" step="1" value="70">
+            <div id="presets" class="chips" role="group" aria-label="Heart rate presets"></div>
+        </section>
 
-            oscillator1.connect(gainNode1);
-            gainNode1.connect(audioCtx.destination);
+        <section class="panel" aria-label="Volume">
+            <label for="volume">Volume</label>
+            <input type="range" id="volume" min="0" max="100" step="1" value="60">
+        </section>
 
-            oscillator1.start(time);
-            oscillator1.stop(time + 0.1);
+        <section class="panel" aria-label="Sleep timer">
+            <label id="timer-label">Sleep timer</label>
+            <div id="timers" class="chips" role="group" aria-labelledby="timer-label"></div>
+            <p id="timer-status" class="timer-status" role="status" aria-live="polite">Timer off. It plays until you stop it.</p>
+        </section>
 
-            // Second beat ("dub") comes slightly after the first beat ("lub")
-            const oscillator2 = audioCtx.createOscillator();
-            const gainNode2 = audioCtx.createGain();
+        <p class="tip">Tip: headphones or a speaker with some bass sound fuller. The screen stays on while it plays so your phone doesn't stop the sound. Not a medical device.</p>
 
-            oscillator2.frequency.setValueAtTime(150, time + 0.2);
-            oscillator2.frequency.exponentialRampToValueAtTime(0.01, time + 0.3);
-
-            gainNode2.gain.setValueAtTime(1, time + 0.2);
-            gainNode2.gain.exponentialRampToValueAtTime(0.01, time + 0.3);
-
-            oscillator2.connect(gainNode2);
-            gainNode2.connect(audioCtx.destination);
-
-            oscillator2.start(time + 0.2);
-            oscillator2.stop(time + 0.3);
-        }
-
-        function startHeartbeat() {
-            const bpm = 183 ; // Beats per minute (heart rate)
-            const interval = 60 / bpm; // Interval in seconds between heartbeats
-
-            // Schedule the heartbeat sound
-            for (let i = 0; i < 16; i++) {
-                const time = audioCtx.currentTime + i * interval;
-                playHeartbeat(time);
-            }
-        }
-
-        document.getElementById('startButton').addEventListener('click', startHeartbeat);
-    </script>
+        <footer>
+            <a href="https://github.com/umar8092/heartbeat-generator" target="_blank" rel="noopener">Open source (MIT) on GitHub</a>
+        </footer>
+    </main>
+    <script src="beat.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
