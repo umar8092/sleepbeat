@@ -22,7 +22,8 @@ body {
     touch-action: manipulation; /* stops double-tap zoom, so a quick second tap is not a second action */
 }
 
-.app { width: min(440px, 100%); text-align: center; }
+.page { width: min(640px, 100%); }
+.app { width: min(440px, 100%); margin: 0 auto; text-align: center; }
 
 h1 { margin: 0; font-size: 1.7rem; letter-spacing: -.02em; }
 .sub { margin: .4rem 0 0; color: var(--muted); }
@@ -88,7 +89,18 @@ input[type="range"] { width: 100%; accent-color: var(--accent); height: 28px; }
 .timer-status { margin: .7rem 0 0; font-size: .92rem; color: var(--muted); }
 
 .tip { margin: 1.2rem .4rem; font-size: .85rem; line-height: 1.5; color: var(--muted); }
-footer { font-size: .82rem; }
+footer { margin-top: 2rem; text-align: center; font-size: .82rem; }
 footer a { color: var(--muted); }
+
+/* the text under the player: what it is for, and common questions */
+.info { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--line); }
+.info h2 { margin: 0 0 1rem; font-size: 1.25rem; letter-spacing: -.01em; }
+.info h2:not(:first-child) { margin-top: 2.2rem; }
+.uses { margin: 0; padding: 0; list-style: none; display: grid; gap: .7rem; }
+.uses li { padding: .9rem 1rem; border-radius: 14px; background: var(--glass); border: 1px solid var(--line); color: var(--muted); line-height: 1.5; }
+.uses strong { display: block; color: var(--ink); margin-bottom: .15rem; }
+.faq details { border-bottom: 1px solid var(--line); padding: .9rem 0; }
+.faq summary { cursor: pointer; font-weight: 600; }
+.faq p { margin: .6rem 0 0; color: var(--muted); line-height: 1.6; }
 
 @media (prefers-reduced-motion: reduce) { .play { transition: none; } }

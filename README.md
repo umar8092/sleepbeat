@@ -1,35 +1,40 @@
-# Heartbeat Sound
+# SleepBeat
 
-A free, gentle heartbeat sound you can loop all night, for sleep, comfort and focus. No sign-up, no ads, no tracking. Everything runs in your browser.
+A free, calming **heartbeat sound** you can loop all night, for sleep, newborns, puppies, focus and relaxation. No ads, no sign-up, no tracking. Everything runs in your browser.
 
-**Live demo:** https://umar8092.github.io/heartbeat-generator/
+**Live demo:** [umar8092.github.io/sleepbeat](https://umar8092.github.io/sleepbeat/)
 
-![The Heartbeat Sound app playing at 70 BPM with a 30 minute sleep timer](screenshots/playing.png)
+![SleepBeat playing a heartbeat sound at 70 BPM with a 30 minute sleep timer](screenshots/playing.png)
 
-## Features
+## What you can do
 
-- **A soft "lub-dub" sound** made in the browser with the Web Audio API. No audio files.
-- **Plays continuously** until you pause it.
-- **Heart rate from 40 to 200 BPM**, with presets: Resting 60, Calm 70, Puppy 100, Newborn 120, Excited 183. Change it while it plays.
-- **Volume control.**
-- **Sleep timer** (15 min, 30 min, 60 min or 8 hours) that fades the sound out gently at the end.
-- **A heart that pulses in time** with each beat.
-- **Keeps your screen awake** while playing (on browsers that support it), so a phone doesn't stop the sound.
+- **Play a soft "lub-dub" heartbeat** made in the browser with the Web Audio API. No audio files.
+- **Loop it all night.** It plays until you pause it.
+- **Set the heart rate from 40 to 200 BPM**, with presets: Resting 60, Calm 70, Puppy 100, Newborn 120 and Excited 183. Change it while it plays.
+- **Set a sleep timer** (15 min, 30 min, 60 min or 8 hours) that fades the sound out gently.
+- **Control the volume.**
+- **Watch a heart pulse in time** with each beat.
+- **Keep the screen awake** while playing (on browsers that support it), so a phone doesn't stop the sound.
 - **Play and pause with the spacebar.**
-- Remembers your heart rate and volume.
+- It remembers your heart rate and volume.
+
+## Good for
+
+Sleep, settling a newborn, comforting a new puppy or kitten, studying, meditation, and as a free looping sound effect for videos, games and podcasts.
 
 ## Tips
 
 - Phone and laptop speakers are weak at deep bass. The sound is tuned to work on small speakers, but headphones or a speaker with some bass will sound fuller.
 - Browsers stop web audio when a phone screen locks. The screen stays on while the app plays, so leave the phone plugged in overnight.
-- This is a comfort and sound tool, not a medical device.
+- For a baby or a pet, keep the volume low and the speaker a few feet away, never inside a crib or bed.
+- A heartbeat sound is a comfort aid, not a medical device or a treatment for sleep problems.
 
 ## Run it yourself
 
 No build step and no dependencies.
 
 ```bash
-git clone https://github.com/umar8092/heartbeat-generator.git
+git clone https://github.com/umar8092/sleepbeat.git
 ```
 
 Open `index.html` in your browser.
